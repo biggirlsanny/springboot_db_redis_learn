@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <script type="text/javascript">
+
+        var page = 1;
+        var tp = 0;
+
+        $(function(){
+            showData();
+        });
+
+        function upPage(){
+            if(page>1){
+                page--;
+                showData();
+            }
+
+        }
+
+        function downPage(){
+            if(page<tp){
+                page++;
+                showData();
+            }
+
+        }
+
+        function showData(){
+            $.ajax({
+                url:'http://127.0.0.1:8080/hello/query?page='+page,
+                success:function(result){
+
+                    var rel = result.content;
+                    tp = result.totalPages;
+
+                    var htmlStr = "<table width='80%' algin='center' border='1'>"+
+                        "<tr><th>ID</th><th>姓名</th><th>code</th><th>是否删除</th><th>操作</th></tr>";
+
+                    for(var i=0;i<rel.length;i++){
+                        var stu = rel[i];
+                        htmlStr += "<tr><td>"+stu.id+"</td><td>"+stu.name+"</td><td>"+stu.code+"</td><td>"+stu.del+"</td>"+
+                            "<td><a href='http://127.0.0.1:8080/helloworld/edit/"+stu.id+"'>修改</a> <a href='http://127.0.0.1:8080/hello/del/"+stu.id+"'>删除</a></td></tr>";
+                    }
+
+                    htmlStr += "</table>";
+
+                    $("#show").html(htmlStr);
+                }
+            });
+        }
+
+    </script>
+
+</head>
+<body>
+
+<h1 style="text-align: center;">学生管理系统</h1>
+<hr>
+<a href="add">添加学生</a>
+
+<div id="show">
+
+</div>
+
+<a href="javascript:upPage();">上一页</a>  <a href="javascript:downPage();">下一页</a>
+
+</body>
+</html>

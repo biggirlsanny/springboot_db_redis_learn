@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Insert title here</title>
+</head>
+<body>
+<!--<p th:text="'Hello, ' + ${category.name} + '!'" />-->
+
+<div th:each="item : ${list}">
+    <h1 th:text="${{item.id}}"></h1>
+    <p><a th:text="${{item.code}}"></a></p>
+    <p><a th:text="${{item.name}}"></a></p>
+</div>
+
+</body>
+</html>

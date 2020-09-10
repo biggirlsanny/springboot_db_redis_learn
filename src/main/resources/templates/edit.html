@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<body>
+<h1>修改类别</h1>
+<hr>
+
+<form action="http://127.0.0.1:8080/hello/save" method="post">
+    <input type="hidden" name="id" th:value="${list.id}">
+    <p>
+        姓名：<input type="text" name="name" th:value="${list.name}"/>
+    </p>
+    <p>
+        年龄：<input type="text" name="code" th:value="${list.code}"/>
+    </p>
+    <p>
+        性别：
+        <input type="radio" name="isDelete" value="1" th:field="*{list.isDelete}" />删除
+        <input type="radio" name="isDelete" value="2" th:field="*{list.isDelete}">不删除
+    </p>
+    <p>
+        <input type="submit" value="保存" />
+    </p>
+</form>
+</body>
+</html>
